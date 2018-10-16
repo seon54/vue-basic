@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>2.3 반복 렌더링 디렉티브</title>
+    <style>
+        #list {
+            width: 400px;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        
+        #list td,
+        #list th {
+            border: 1px solid black;
+            text-align: center;
+        }
+        
+        #list>thead>tr {
+            color: yellow;
+            background-color: purple;
+        }
+    </style>
+    <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="example">
+        <table id="list">
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>이름</th>
+                    <th>전화번호</th>
+                    <th>주소</th>
+                </tr>
+                <tbody id="contacts">
+                    <tr v-for="contact in contacts">
+                        <td>{{contact.no}}</td>
+                        <td>{{contact.name}}</td>
+                        <td>{{contact.tel}}</td>
+                        <td>{{contact.address}}</td>
+                    </tr>
+                </tbody>
+            </thead>
+        </table>
+    </div>
+    <hr>
+    <div id="example2">
+        <select id="regions">
+            <option disabled="disabled" selected>지역을 선택하세요</option>
+            <option v-for="(val, key) in regions" v-bind:value="key">{{val}}</option>
+        </select>
+    </div>
+    <script>
+        var model = {
+            "pageNo": 1,
+            "pageSize": 10,
+            "totalCount": 100,
+            "contacts": [{
+                "no": 100,
+                "name": "설현",
+                "tel": "010-1234-5678",
+                "address": "서울"
+            }, {
+                "no": 99,
+                "name": "혜리",
+                "tel": "010-5465-9865",
+                "address": "서울"
+            }, {
+                "no": 98,
+                "name": "하니",
+                "tel": "010-2354-6565",
+                "address": "경기"
+            }, {
+                "no": 97,
+                "name": "지은",
+                "tel": "010-5654-9235",
+                "address": "제주"
+            }, {
+                "no": 96,
+                "name": "지수",
+                "tel": "010-3265-2354",
+                "address": "전남"
+            }, {
+                "no": 95,
+                "name": "연아",
+                "tel": "010-3296-6548",
+                "address": "광주"
+            }, {
+                "no": 94,
+                "name": "현수",
+                "tel": "010-8954-6621",
+                "address": "대전"
+            }, {
+                "no": 93,
+                "name": "지현",
+                "tel": "010-9864-2665",
+                "address": "부산"
+            }, {
+                "no": 92,
+                "name": "아라",
+                "tel": "010-3974-1231",
+                "address": "울산"
+            }, ]
+        };
+
+        var list = new Vue({
+            el: "#example",
+            data: model
+        });
+
+        var regions = {
+            "A": "Asia",
+            "B": "America",
+            "C": "Europe",
+            "D": "Africa",
+            "E": "Oceania",
+        };
+
+        var list = new Vue({
+            el: "#example2",
+            data: {
+                regions: regions
+            }
+        })
+    </script>
+</body>
+
+</html>
