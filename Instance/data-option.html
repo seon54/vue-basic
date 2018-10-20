@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>getter/setter method</title>
+    <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="example">
+        금액 : <span>{{amount}}원</span>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#example",
+            data: {
+                amt: 1234567
+            },
+            computed: {
+                amount: {
+                    get: function() {
+                        var s = new String("" + this.amt); // 숫자 -> 문자 변환
+                        var result = "";
+                        var num = 0;
+                        for (var i = s.length - 1; i >= 0; i--) {
+                            result = s[i] + result; // 뒤에서부터 result에 추가
+                            if (num % 3 === 2 && i !== 0) {
+                                result = "," + result; // 세자리마다 , 추가
+                            }
+                            num++;
+                        }
+                        return result;
+                    },
+                    set: function(amt) {
+                        if (typeof(amt) === "string") {
+                            var result = parseInt(amt.replace(/,/g, "")) // 문자열 받을 경우 comma 제거 후 숫자 변환
+                            if (isNaN(result)) this.amt = 0;
+                            else this.amt = result;
+                        } else if (typeof(amt) === "number")
+                            this.amt = amt;
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
