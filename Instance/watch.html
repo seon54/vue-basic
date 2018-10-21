@@ -4,12 +4,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Watched Property</title>
+    <title>Watch & Computed 비교</title>
     <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
 </head>
 
 <body>
     <div id="example">
+        <h3>watch property 사용</h3>
+        x : <input type="text" v-model="x"><br/> y : <input type="text" v-model="y"><br/> 덧셈 결과 : {{sum}}
+
+    </div>
+    <div id="example2">
+        <h3>computed property 사용</h3>
         x : <input type="text" v-model="x"><br/> y : <input type="text" v-model="y"><br/> 덧셈 결과 : {{sum}}
 
     </div>
@@ -21,7 +27,7 @@
                 y: 0,
                 sum: 0
             },
-            watch: {
+            watch: { // 해당 속성이 변경될 때 호출
                 x: function(v) {
                     console.log("## x 변경");
                     var result = Number(v) + Number(this.y);
@@ -36,6 +42,21 @@
                     else this.sum = result;
                 }
 
+            }
+        })
+
+        var vm2 = new Vue({
+            el: "#example2",
+            data: {
+                x: 0,
+                y: 0
+            },
+            computed: {
+                sum: function() {
+                    var result = Number(this.x) + Number(this.y);
+                    if (isNaN(result)) return 0;
+                    else return result;
+                }
             }
         })
     </script>
